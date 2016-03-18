@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pTrack", "pTrack\pTrack.vcxproj", "{F7FB8511-EAE1-4D15-B599-7A774379EE7E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PtHookDll", "..\..\Visual Studio 2015\Projects\PtHookDll\PtHookDll.vcxproj", "{AFEC722E-BF9E-4364-A03E-647783121623}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{F7FB8511-EAE1-4D15-B599-7A774379EE7E}.Release|x64.Build.0 = Release|x64
 		{F7FB8511-EAE1-4D15-B599-7A774379EE7E}.Release|x86.ActiveCfg = Release|Win32
 		{F7FB8511-EAE1-4D15-B599-7A774379EE7E}.Release|x86.Build.0 = Release|Win32
+		{AFEC722E-BF9E-4364-A03E-647783121623}.Debug|x64.ActiveCfg = Debug|x64
+		{AFEC722E-BF9E-4364-A03E-647783121623}.Debug|x64.Build.0 = Debug|x64
+		{AFEC722E-BF9E-4364-A03E-647783121623}.Debug|x86.ActiveCfg = Debug|Win32
+		{AFEC722E-BF9E-4364-A03E-647783121623}.Debug|x86.Build.0 = Debug|Win32
+		{AFEC722E-BF9E-4364-A03E-647783121623}.Release|x64.ActiveCfg = Release|x64
+		{AFEC722E-BF9E-4364-A03E-647783121623}.Release|x64.Build.0 = Release|x64
+		{AFEC722E-BF9E-4364-A03E-647783121623}.Release|x86.ActiveCfg = Release|Win32
+		{AFEC722E-BF9E-4364-A03E-647783121623}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

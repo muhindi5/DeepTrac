@@ -11,6 +11,7 @@
 #include <tlhelp32.h>
 #include <tchar.h>
 
+
 /*
 Structure to hold retrived process details
 */
@@ -190,6 +191,4 @@ BOOL CALLBACK EnumWindowsProc(HWND hWnd, LPARAM lParam) {
 	}
 	return TRUE;
 }
-
-
 

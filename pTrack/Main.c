@@ -12,6 +12,8 @@
 //function prototypes
 HHOOK installHook(HANDLE);
 BOOL unHookDll(HANDLE, HHOOK);
+//BOOL writeToLogF();
+//VOID generateRandomStr(char holder[]);
 
 int main(int argc, char *argv[]) {
 
@@ -23,14 +25,14 @@ int main(int argc, char *argv[]) {
 	//setupWSA();
 	//SOCKET socket = connectToServer();
 	//getCurrentWin(socket);
-		HANDLE h = createLogFile();
-		writeToLog(h, "----------Logging--------------");
-		HHOOK hHookHnd = installHook(h);
+
+	HANDLE handleToMainLog = createMainlogFile();
+		writeToLog(handleToMainLog, "----------logging--------------");
+		HHOOK hkHndDll = installHook(handleToMainLog);
 		puts("Running...");	
 		puts("Enter 1 to exit\n");
-		Sleep(50000);//pause for 2 minutes, then exit
-		if (getchar() == 1) {
-			unHookDll(h, hHookHnd);
+		while (getchar() == 1) {
+			unHookDll(handleToMainLog, hkHndDll);
 			exit(0);
 		}
 	return 0;
@@ -54,17 +56,19 @@ HHOOK installHook(HANDLE logFileHandle) {
 	writeToLog(logFileHandle, "DLL Loaded!");
 	 hookProc = (HOOKPROC)GetProcAddress(dllInstance,"_GetMsgProc@12");
 	 if (hookProc == NULL) {
+			writeToLog(logFileHandle, "Hook is Null!");
 			printf("Error (NULL Hook): %ld\n", GetLastError());
 			exit(1);
 	 }
 
-	hSysHook = SetWindowsHookEx(WH_GETMESSAGE,hookProc,dllInstance,0);
+	hSysHook = SetWindowsHookEx(WH_CALLWNDPROC,hookProc,dllInstance,0);
 	if (hSysHook == NULL) {
 		writeToLog(logFileHandle, "Failed in installing Hook...Exiting!");
 		printf("Error (Hook): %ld\n", GetLastError());
 		exit(1);
 	}
 		writeToLog(logFileHandle, "Hook Installed Successfully!");
+		CloseHandle(logFileHandle);
 		return hSysHook;
 }
 
@@ -79,3 +83,45 @@ BOOL unHookDll(HANDLE logFileHandle, HHOOK handleToDll) {
 		return unloaded;
 	}
 }
+
+//BOOL writeToLogF() {
+//	char fileName[10];
+	char fName[] = "C:\\Users\\Kelli\\Documents\\GitHubVisualStudio\\ptrack_VS\\Debug\\";
+//	char buffer[75]; //place concatenated string here
+//	generateRandomStr(fileName);
+//	snprintf(buffer, sizeof(buffer), "%s%s.txt", fName, fileName);
+//	HANDLE fHandle =
+//		CreateFile(buffer,
+//			FILE_GENERIC_READ | FILE_GENERIC_WRITE,
+//			FILE_SHARE_READ | FILE_SHARE_WRITE,
+//			NULL, OPEN_ALWAYS,
+//			FILE_ATTRIBUTE_NORMAL,
+//			NULL);
+//	if (fHandle == INVALID_HANDLE_VALUE) {
+//		CreateFile("C:\\Users\\Kelli\\Documents\\GitHubVisualStudio\\ptrack_VS\\Debug\\error.log",
+//			FILE_GENERIC_READ | FILE_GENERIC_WRITE,
+//			FILE_SHARE_READ | FILE_SHARE_WRITE,
+//			NULL, OPEN_ALWAYS,
+//			FILE_ATTRIBUTE_NORMAL, NULL);
+//	}
+//	DWORD bytesWritten;
+//	WriteFile(fHandle, buffer, strlen(buffer), &bytesWritten, NULL);
+//	CloseHandle(fHandle);
+//	return TRUE;
+//}
+//
+//
+///*Generate a log file name for the process */
+//VOID generateRandomStr(char holder[]) {
+//	size_t i = 0;
+//	srand(time(NULL)); //seed random number generator using system clock seconds
+//	while (i < 9) {
+//		int x = (97 + rand() % 97);
+//		if (x > 96 && x < 122) {
+//			holder[i] = ((char)x);
+//			//puts((char)x);
+//			i++;
+//		}
+//	}
+//	holder[i++] = '\0'; //terminate the string
+//}

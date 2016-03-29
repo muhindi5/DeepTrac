@@ -1,0 +1,1 @@
+----------logging--------------Inside InstallHook:DLL Loaded!Hook Installed Successfully!
